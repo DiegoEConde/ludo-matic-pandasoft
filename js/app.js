@@ -13,6 +13,7 @@ const diceModalAction = document.querySelector('#dice-modal-action');
 const turnLabel = document.querySelector('#turn-label');
 const modalKicker = document.querySelector('#modal-kicker');
 const diceSides = [...document.querySelectorAll('#rolling-die .dice-side')];
+const centerDiceDots = [...document.querySelectorAll('.dice-face i')];
 
 const diceFaces = {
   1: [4],
@@ -49,10 +50,10 @@ function getHomeClass(row, column) {
 }
 
 function getLaneClass(row, column) {
-  if (row === 7 && column > 0 && column < 6) return 'lane-green';
-  if (column === 7 && row > 0 && row < 6) return 'lane-red';
-  if (row === 7 && column > 8 && column < 14) return 'lane-blue';
-  if (column === 7 && row > 8 && row < 14) return 'lane-yellow';
+  if (row === 7 && column > 0 && column < 7) return 'lane-green';
+  if (column === 7 && row > 0 && row < 7) return 'lane-red';
+  if (row === 7 && column > 7 && column < 14) return 'lane-blue';
+  if (column === 7 && row > 7 && row < 14) return 'lane-yellow';
   return '';
 }
 
@@ -118,6 +119,14 @@ function setDiceFace(value) {
   rollingDie.dataset.value = value;
 }
 
+function setCenterDiceFace() {
+  const fixedDots = diceFaces[6];
+  centerDiceDots.forEach((dot, index) => {
+    dot.hidden = !fixedDots.includes(index + 1);
+    dot.className = `dot-position-${index + 1}`;
+  });
+}
+
 function rollDice() {
   if (gameState.isRolling) return;
 
@@ -163,6 +172,7 @@ diceModalAction.addEventListener('click', () => {
 
 updateTurnUI();
 setDiceFace(6);
+setCenterDiceFace();
 
 function showScreen(screenToShow, screenToHide) {
   screenToHide.hidden = true;

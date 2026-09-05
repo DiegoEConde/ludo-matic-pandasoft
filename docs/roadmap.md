@@ -140,6 +140,12 @@ Cada tirada cambia el estado de forma valida y nunca produce valores fuera de ra
 - Dado modal corregido con caras visuales reales del 1 al 6, sincronizadas con el resultado.
 - Dado rediseñado como cubo 3D con seis caras, perspectiva y rotación de referencia realista.
 - Cara final aislada y renderizada al frente para mostrar exactamente los puntos del resultado, sin mezclar caras.
+- Tipografia movil estabilizada sin cursiva accidental y marca PandaSoft reducida para no cubrir tarjetas.
+- Logo PandaSoft inferior con efecto glass y translucidez para reducir su peso visual.
+- Dado central sincronizado con la cara y el resultado de la ultima tirada.
+- Dado central reducido a un circulo fijo con seis puntos y glow pulsante para indicar donde tocar.
+- Dado central reducido nuevamente a 44 px en movil para liberar el recorrido.
+- Carriles de color extendidos hasta el centro y esquinas internas neutralizadas para una lectura mas limpia.
 
 ## Sprint 4 - Salida y movimiento automatico
 
