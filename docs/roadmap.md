@@ -1,6 +1,6 @@
 # Ludo Matic - Roadmap de sprints
 
-**Version:** 0.1
+**Version:** 1.0
 **Cadencia:** sprints cortos, revisables uno por uno
 **Regla de avance:** al terminar cada sprint se entrega un resumen y una guia de prueba. El siguiente sprint comienza solo despues de la aprobacion del usuario.
 
@@ -13,7 +13,7 @@
 
 ## Sprint 0 - Documentacion y decisiones
 
-**Estado:** Propuesto
+**Estado:** Documentacion entregada; decisiones reflejadas en v1
 
 ### Objetivo del Sprint 0
 
@@ -31,7 +31,7 @@ Leer ambos documentos y confirmar que la variante de reglas y el alcance son cor
 
 ## Sprint 1 - Base visual y pantalla principal
 
-**Estado:** Completado, pendiente de aprobacion
+**Estado:** Completado y aprobado
 
 ### Objetivo del Sprint 1
 
@@ -50,7 +50,7 @@ Crear la primera experiencia navegable sin logica de partida.
 
 La pantalla se entiende sin explicacion adicional y se ve correctamente en movil y escritorio.
 
-### Entrega del Sprint 2
+### Entrega del Sprint 1
 
 - Pantalla principal con logo tipografico y marca visual propia.
 - Refinamiento de identidad: motivo de cuatro colores, textura de tablero y variables cromaticas reutilizables.
@@ -67,7 +67,7 @@ La pantalla se entiende sin explicacion adicional y se ve correctamente en movil
 
 ## Sprint 2 - Tablero y jugadores
 
-**Estado:** Completado, pendiente de aprobacion
+**Estado:** Completado y aprobado
 
 ### Objetivo del Sprint 2
 
@@ -104,11 +104,11 @@ El tablero es legible, estable y no se solapa en los breakpoints definidos.
 - Tarjeta activa con efecto glow pulsante.
 - Indicador de turno aumentado y reforzado en negrita.
 
-**Siguiente paso:** Sprint 3 bloqueado hasta aprobar Sprint 2
+**Siguiente paso:** Sprint 3 completado y aprobado; ver Sprint 4.
 
 ## Sprint 3 - Motor de estado y dado
 
-**Estado:** En progreso, pendiente de aprobacion
+**Estado:** Completado y aprobado
 
 ### Objetivo del Sprint 3
 
@@ -128,7 +128,7 @@ Implementar el ciclo de turno y la tirada D6 sin mover fichas aun.
 
 Cada tirada cambia el estado de forma valida y nunca produce valores fuera de rango.
 
-### Entrega parcial
+### Entrega y refinamientos aprobados
 
 - Estado inicial con orden de Sol, Luna, Rio y Mia.
 - Dado central conectado a un modal con animacion.
@@ -147,7 +147,17 @@ Cada tirada cambia el estado de forma valida y nunca produce valores fuera de ra
 - Dado central reducido nuevamente a 44 px en movil para liberar el recorrido.
 - Carriles de color extendidos hasta el centro y esquinas internas neutralizadas para una lectura mas limpia.
 
+### Refinamiento final del Sprint 3
+
+- Intro PandaSoft: entrada de 700 ms, salida a los 2 segundos y desvanecido de 600 ms; sin animaciones con movimiento reducido.
+- Marca fija de 82/54 px al 32%, con espacio reservado y margenes de safe area.
+- Inicio de escritorio en dos columnas y tablero ajustado a la altura, sin desplazamiento en los tamanos probados.
+- El dado 3D provisional fue reemplazado por caras CSS Grid 3x3, puntos centrados y una tirada suave de 900 ms.
+- Las notas anteriores describen iteraciones; este refinamiento refleja la version vigente.
+
 ## Sprint 4 - Salida y movimiento automatico
+
+**Estado:** Completado y aprobado
 
 ### Objetivo del Sprint 4
 
@@ -167,7 +177,33 @@ Permitir sacar y mover fichas con la animacion solicitada.
 
 Una ficha recorre exactamente el numero del dado y la interfaz no permite seleccionar una ficha invalida.
 
+### Entrega del Sprint 4
+
+- Dieciseis fichas con identidad y posicion logica independientes de los pixeles.
+- Recorrido comun de 52 casillas; salida y carril propios para cada color.
+- Salida con 6, eleccion entre sacar otra ficha o avanzar una activa y movimiento secuencial de 180 ms por casilla.
+- Seleccion mediante fichas resaltadas del tablero o botones numerados de al menos 44 px en las tarjetas.
+- Destino ocupado por ficha propia no seleccionable, incluida la salida; pasar por encima sigue permitido.
+- Contadores de casa y juego actualizados, mensajes de accion y foco de teclado.
+- Dado y navegacion bloqueados durante movimiento; proteccion contra selecciones invalidas y dobles clics.
+- Turno extra solo despues de resolver el movimiento; pase automatico si no hay jugadas legales.
+- Escape no cancela una tirada ni deja la partida bloqueada; volver al inicio conserva una eleccion pendiente.
+- Movimiento reducido sin saltos animados; se conserva el mismo resultado logico.
+- Limite exacto del recorrido y estado de ficha al centro preparados para el Sprint 5. Todavia no hay capturas ni ganador.
+
+### Validacion del Sprint 4
+
+- 13 pruebas de reglas aprobadas: salida, recorrido, avance exacto, seleccion, limites y turnos.
+- Prueba de navegador aprobada en Edge: 1366x768, 1024x600, 390x844 y 320x640; ultimo caso con movimiento reducido.
+- Sin desplazamiento de escritorio ni desbordes horizontales en los tamanos probados.
+- Pruebas de teclado, tacto, seleccion desde tablero, salida y destino propio ocupados, reentrada, Escape, doble clic y avance de seis pasos.
+- Guia reproducible: [Sprint 4 - pruebas y entrega](sprint-4.md).
+
+**Siguiente paso:** Sprint 5 implementado; ver entrega siguiente.
+
 ## Sprint 5 - Capturas, llegada y victoria
+
+**Estado:** Completado y aprobado
 
 ### Objetivo del Sprint 5
 
@@ -187,7 +223,33 @@ Completar el nucleo de las reglas.
 
 Una partida puede llegar a una victoria valida y las reglas de captura y llegada se respetan.
 
+### Entrega del Sprint 5
+
+- Captura al terminar sobre una ficha rival del recorrido comun, incluidas las salidas.
+- La ficha capturada vuelve a casa y necesita otro 6 para salir.
+- Pasar por encima de una rival no la captura; las columnas finales y fichas terminadas estan protegidas.
+- Se conserva la prohibicion de terminar sobre una ficha propia, incluida la salida.
+- Llegada exacta: no se permiten movimientos que excedan el centro.
+- Contador visible de fichas terminadas para cada jugador, desde 0/4 hasta 4/4.
+- Estado terminal de victoria cuando llegan las cuatro fichas; no se concede otro turno despues de ganar.
+- Dialogo con ganador, resumen de fichas terminadas, Jugar otra vez y Volver al inicio.
+- Reinicio limpio de las dieciseis fichas, turno, resultado y ganador; volver al inicio permite consultar el resultado.
+- Reglas puras de resolucion separadas de la animacion y mensajes de captura y llegada.
+- Ajuste de tarjetas en notebooks de poca altura para conservar la pantalla sin desplazamiento.
+
+### Validacion del Sprint 5
+
+- 23 pruebas de reglas: movimiento, ocupacion, captura, proteccion de carriles, llegada, victoria y estado inicial.
+- Regresion del Sprint 4 y partida completa del Sprint 5 en Edge: 1366x768, 1024x600, 390x844 y 320x640 (movimiento reducido en el ultimo caso).
+- La partida automatica genera capturas en las cuatro salidas y lleva las cuatro fichas de Sol al centro mediante acciones reales de la interfaz.
+- Victoria, bloqueo de jugadas posteriores, foco de teclado, regreso al inicio, reapertura del resultado y nueva partida comprobados.
+- Guia reproducible: [Sprint 5 - pruebas y entrega](sprint-5.md).
+
+**Siguiente paso:** Sprint 6, autorizado por el usuario.
+
 ## Sprint 6 - Celebracion, feedback y accesibilidad
+
+**Estado:** Completado y aprobado
 
 ### Objetivo del Sprint 6
 
@@ -206,7 +268,19 @@ Convertir el prototipo funcional en una experiencia clara para ninos.
 
 La accion siguiente siempre es evidente y la interfaz sigue siendo usable sin depender solo de animaciones o color.
 
+### Entrega del Sprint 6
+
+- Insignia de turno extra y celebracion breve al obtener 6.
+- Capturas y llegadas resaltadas en el mensaje y en las fichas de las tarjetas hasta la siguiente tirada.
+- Ayuda cuando no hay movimientos; pase automatico a los 8 segundos o inmediato con Continuar. La explicacion permanece en el tablero.
+- Resultado numerico incluido en el anuncio accesible del dado, con descripcion del dialogo y region atomica.
+- Foco visible reforzado, animaciones de duracion limitada y movimiento reducido sin animaciones ni transiciones.
+- Reglas iniciales aclaradas: captura rival, carril seguro y llegada exacta.
+- Guia de prueba: [Sprint 6](sprint-6.md).
+
 ## Sprint 7 - Pruebas, pulido y entrega v1
+
+**Estado:** Implementado y validado automaticamente; pendiente de aceptacion manual de v1
 
 ### Objetivo del Sprint 7
 
@@ -224,6 +298,15 @@ Estabilizar el juego y preparar una entrega reproducible.
 ### Criterio de terminado del Sprint 7
 
 La partida completa funciona desde inicio hasta victoria en los dispositivos objetivo sin errores bloqueantes.
+
+### Entrega del Sprint 7
+
+- Comandos npm start, npm test y npm run test:browser y README de ejecucion.
+- Pantalla inicial ajustada para notebooks bajos con fuentes del sistema.
+- Dado compacto en horizontal con la accion visible.
+- Continuar partida al volver a Inicio y limite de espera para el logo de presentacion.
+- Suite final con seis tamanos, recursos locales, doble clic, recarga y partida completa.
+- Guia de entrega y revision manual: [Sprint 7](sprint-7.md).
 
 ## Riesgos y decisiones abiertas
 
@@ -243,3 +326,13 @@ Al cerrar cada sprint se entregara:
 - validaciones ejecutadas;
 - instrucciones exactas para probar;
 - pendientes y riesgos del siguiente sprint.
+
+## Ampliacion posterior: 2 a 4 jugadores
+
+Implementada por solicitud del usuario. Selector inicial, participantes enfrentados para dos personas, turnos y resultados limitados a quienes juegan. Cambiar la cantidad inicia una partida nueva al pulsar el boton correspondiente; la revancha conserva la cantidad. Pruebas de reglas y partidas completas de 2 y 3 jugadores agregadas a las suites de npm.
+
+Correccion de colores solicitada: azul y rojo enfrentados para dos jugadores, amarillo como tercero y verde como cuarto. La distribucion horaria es azul, amarillo, rojo y verde, empezando por azul.
+
+## Ampliacion posterior: nombres con autocompletado
+
+Implementada: selector por participante, base Eri/Melina/Diego/Gustavo, nombres nuevos guardados en el navegador, coincidencias al escribir y lista con hasta seis filas mas scroll. Los nombres elegidos se usan durante toda la partida y en la revancha. Pruebas automatizadas de persistencia, teclado y victoria con nombres personalizados incorporadas a npm test y npm run test:browser.

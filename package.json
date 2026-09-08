@@ -1,0 +1,14 @@
+{
+  "name": "ludo-matic",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Ludo local para 2 a 4 jugadores",
+  "scripts": {
+    "start": "node scripts/serve.cjs",
+    "test": "node --test tests/movement.test.mjs tests/resolution.test.mjs tests/players.test.mjs tests/names.test.mjs tests/opening.test.mjs",
+    "test:browser": "node tests/sprint7.browser.cjs && node tests/players.browser.cjs && node tests/names.browser.cjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

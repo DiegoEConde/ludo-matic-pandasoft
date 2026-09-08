@@ -2,20 +2,21 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>Ludo Matic | Jugar juntos</title>
     <link rel="stylesheet" href="css/styles.css" />
+    <script defer src="js/branding.js"></script>
     <script type="module" src="js/app.js"></script>
   </head>
   <body>
-    <section class="intro-screen" id="intro-screen" aria-label="Presentacion de PandaSoft">
+    <section class="intro-screen" id="intro-screen" aria-label="Presentaci&#243;n de PandaSoft">
       <div class="intro-logo-frame">
-        <img src="PandaSoftLogo.png" alt="PandaSoft" class="intro-logo" />
+        <img src="PandaSoftLogo.png" alt="PandaSoft: panda con controles de videojuegos" width="1254" height="1254" fetchpriority="high" class="intro-logo" />
       </div>
     </section>
 
-    <div class="corner-logo" aria-label="PandaSoft, empresa creadora">
-      <img src="PandaSoftLogo.png" alt="PandaSoft" />
+    <div class="corner-logo">
+      <img src="PandaSoftLogo.png" alt="PandaSoft, creadora del juego" width="1254" height="1254" />
     </div>
 
     <main class="app-shell">
@@ -24,6 +25,7 @@
         <div class="ambient-shape ambient-shape-two" aria-hidden="true"></div>
 
         <div class="home-content">
+          <div class="home-intro">
           <header class="brand-lockup" aria-label="Ludo Matic">
             <div class="brand-mark" aria-hidden="true">
               <span class="brand-pip brand-pip-red"></span>
@@ -34,18 +36,16 @@
               <span class="brand-star">*</span>
             </div>
             <h1 id="home-title">Ludo <span>Matic</span></h1>
-            <p class="brand-meta"><span>4 colores</span><i aria-hidden="true"></i><span>1 ganador</span></p>
           </header>
 
           <article class="rules-card" aria-labelledby="rules-title">
             <div class="card-eyebrow">
               <span class="eyebrow-line"></span>
-              <span>Reglas rapidas</span>
+              <span>Reglas r&#225;pidas</span>
             </div>
-            <h2 id="rules-title">Llega al centro antes que los demas.</h2>
+            <h2 id="rules-title">Llega al centro antes que los dem&#225;s.</h2>
             <p>
-              Tira el dado, saca tus fichas con un 6 y avanza por el camino de tu
-              color. Si caes sobre otra ficha, vuelve a mandarla a casa. Gana quien
+              En tu primer turno, tira el dado y saca una ficha gratis y avanza tantas casillas como indique el dado. Despu&#233;s necesitas un 6 para sacar las dem&#225;s fichas. Avanza por el camino. Si caes sobre una ficha rival en el recorrido com&#250;n, la mandas a casa. Tu carril final es seguro y debes llegar al centro con el n&#250;mero exacto. Gana quien
               lleve sus cuatro fichas al centro.
             </p>
             <div class="rules-strip" aria-label="Resumen de reglas">
@@ -60,16 +60,32 @@
             </div>
           </article>
 
+
+
+          </div>
+          <div class="home-configuration">
+          <fieldset class="player-setup" id="player-setup" aria-describedby="setup-hint">
+            <legend>&#191;Cu&#225;ntos juegan?</legend>
+            <div class="player-count-options">
+              <label><input type="radio" name="player-count" value="2"><span>2 jugadores</span></label>
+              <label><input type="radio" name="player-count" value="3"><span>3 jugadores</span></label>
+              <label><input type="radio" name="player-count" value="4" checked><span>4 jugadores</span></label>
+            </div>
+            <p id="setup-hint" aria-live="polite">Elige un nombre o escribe uno nuevo para cada color.</p>
+          </fieldset>
+
           <button class="primary-button" id="start-button" type="button">
             <span>Empezar a jugar</span>
             <span class="button-arrow" aria-hidden="true">&#8594;</span>
           </button>
 
-          <p class="home-note"><span class="status-dot"></span> Partida local para 4 jugadores</p>
+          <button class="edit-names-button" id="edit-names-button" type="button" hidden>Editar nombres</button>
+          <p class="home-note"><span class="status-dot"></span> Partida local para 2 a 4 jugadores</p>
+          </div>
         </div>
       </section>
 
-      <section class="screen screen-board" id="board-screen" aria-labelledby="board-title" hidden>
+      <section class="screen screen-board" id="board-screen" aria-labelledby="board-title" tabindex="-1" hidden>
         <header class="board-header">
           <button class="back-button" id="back-button" type="button" aria-label="Volver al inicio">
             <span aria-hidden="true">&#8592;</span>
@@ -85,58 +101,19 @@
             </div>
             <h2 id="board-title">A jugar</h2>
           </div>
-          <div class="turn-pill"><span class="status-dot"></span><span id="turn-label">Turno de Sol</span></div>
+          <div class="turn-pill"><span class="status-dot"></span><span id="turn-label">Turno de Eri</span></div>
         </header>
 
+        <p class="accessible-status" id="game-status" role="status" aria-live="polite" aria-atomic="true">Eri: tira el dado para empezar.</p>
+
         <div class="game-layout">
-          <article class="player-card player-green is-active" aria-label="Jugador verde">
+          <article class="player-card player-blue is-active" aria-label="Jugador azul">
             <div class="player-card-top">
               <span class="player-color-dot" aria-hidden="true"></span>
               <span class="player-turn">Tu turno</span>
             </div>
             <div class="player-name-row">
-              <h3>Sol</h3>
-              <span class="player-color-label">Verde</span>
-            </div>
-            <div class="token-reserve" aria-label="4 fichas en casa">
-              <span class="player-token"></span><span class="player-token"></span>
-              <span class="player-token"></span><span class="player-token"></span>
-            </div>
-            <p class="reserve-label">4 en casa</p>
-          </article>
-
-          <article class="player-card player-red" aria-label="Jugador rojo">
-            <div class="player-card-top">
-              <span class="player-color-dot" aria-hidden="true"></span>
-              <span class="player-turn">Esperando</span>
-            </div>
-            <div class="player-name-row">
-              <h3>Luna</h3>
-              <span class="player-color-label">Rojo</span>
-            </div>
-            <div class="token-reserve" aria-label="4 fichas en casa">
-              <span class="player-token"></span><span class="player-token"></span>
-              <span class="player-token"></span><span class="player-token"></span>
-            </div>
-            <p class="reserve-label">4 en casa</p>
-          </article>
-
-          <div class="ludo-board" id="ludo-board" role="img" aria-label="Tablero de Ludo con cuatro zonas de color">
-            <div class="board-grid" id="board-grid"></div>
-            <button class="dice-control" id="dice-control" type="button" aria-label="Dado de la partida">
-              <span class="dice-face"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
-              <span class="dice-label">Dado</span>
-            </button>
-            <div class="board-center-mark" aria-hidden="true">LM</div>
-          </div>
-
-          <article class="player-card player-blue" aria-label="Jugador azul">
-            <div class="player-card-top">
-              <span class="player-color-dot" aria-hidden="true"></span>
-              <span class="player-turn">Esperando</span>
-            </div>
-            <div class="player-name-row">
-              <h3>Rio</h3>
+              <h3>Eri</h3>
               <span class="player-color-label">Azul</span>
             </div>
             <div class="token-reserve" aria-label="4 fichas en casa">
@@ -152,8 +129,50 @@
               <span class="player-turn">Esperando</span>
             </div>
             <div class="player-name-row">
-              <h3>Mia</h3>
+              <h3>Diego</h3>
               <span class="player-color-label">Amarillo</span>
+            </div>
+            <div class="token-reserve" aria-label="4 fichas en casa">
+              <span class="player-token"></span><span class="player-token"></span>
+              <span class="player-token"></span><span class="player-token"></span>
+            </div>
+            <p class="reserve-label">4 en casa</p>
+          </article>
+
+          <div class="ludo-board" id="ludo-board" role="group" aria-label="Tablero de Ludo con cuatro zonas de color">
+            <div class="board-grid" id="board-grid" aria-hidden="true"></div>
+            <div class="board-tokens" id="board-tokens"></div>
+            <button class="dice-control" id="dice-control" type="button" aria-label="Dado de la partida">
+              <span class="dice-face"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+              <span class="dice-label">Dado</span>
+            </button>
+            <div class="board-center-mark" aria-hidden="true">LM</div>
+          </div>
+
+          <article class="player-card player-red" aria-label="Jugador rojo">
+            <div class="player-card-top">
+              <span class="player-color-dot" aria-hidden="true"></span>
+              <span class="player-turn">Esperando</span>
+            </div>
+            <div class="player-name-row">
+              <h3>Melina</h3>
+              <span class="player-color-label">Rojo</span>
+            </div>
+            <div class="token-reserve" aria-label="4 fichas en casa">
+              <span class="player-token"></span><span class="player-token"></span>
+              <span class="player-token"></span><span class="player-token"></span>
+            </div>
+            <p class="reserve-label">4 en casa</p>
+          </article>
+
+          <article class="player-card player-green" aria-label="Jugador verde">
+            <div class="player-card-top">
+              <span class="player-color-dot" aria-hidden="true"></span>
+              <span class="player-turn">Esperando</span>
+            </div>
+            <div class="player-name-row">
+              <h3>Gustavo</h3>
+              <span class="player-color-label">Verde</span>
             </div>
             <div class="token-reserve" aria-label="4 fichas en casa">
               <span class="player-token"></span><span class="player-token"></span>
@@ -163,10 +182,11 @@
           </article>
         </div>
 
-        <dialog class="dice-modal" id="dice-modal" aria-labelledby="dice-modal-title">
+        <dialog class="dice-modal" id="dice-modal" aria-labelledby="dice-modal-title" aria-describedby="dice-message">
           <div class="dice-modal-inner">
-            <p class="modal-kicker" id="modal-kicker">Turno de Sol</p>
+            <p class="modal-kicker" id="modal-kicker">Turno de Eri</p>
             <h3 id="dice-modal-title">Tira el dado</h3>
+            <p class="six-celebration" id="six-celebration" hidden><span aria-hidden="true">&#9733;</span> &#161;Un 6! Turno extra</p>
             <div class="dice-cube" id="rolling-die" aria-hidden="true">
               <div class="dice-side dice-front" data-face="1"></div>
               <div class="dice-side dice-back" data-face="6"></div>
@@ -175,11 +195,35 @@
               <div class="dice-side dice-top" data-face="5"></div>
               <div class="dice-side dice-bottom" data-face="2"></div>
             </div>
-            <p class="dice-message" id="dice-message">El dado esta rodando...</p>
+            <p class="dice-message" id="dice-message" role="status" aria-live="polite" aria-atomic="true">El dado est&#225; rodando...</p>
             <button class="modal-action" id="dice-modal-action" type="button" disabled>Esperar resultado</button>
+          </div>
+        </dialog>
+        <dialog class="victory-modal" id="victory-modal" aria-labelledby="victory-title" aria-describedby="victory-description">
+          <div class="victory-content">
+            <p class="modal-kicker">Partida terminada</p>
+            <div class="victory-medal" aria-hidden="true">&#9733;</div>
+            <h3 id="victory-title">Tenemos un ganador</h3>
+            <p id="victory-description">Las cuatro fichas llegaron al centro. &#161;Bien jugado!</p>
+            <ul class="victory-results" id="victory-results" aria-label="Fichas terminadas por jugador"></ul>
+            <button class="modal-action" id="restart-button" type="button">Jugar otra vez</button>
+            <button class="victory-home-button" id="victory-home-button" type="button">Volver al inicio</button>
           </div>
         </dialog>
       </section>
     </main>
+    <dialog class="names-modal" id="names-modal" aria-labelledby="names-modal-title" aria-describedby="names-modal-description">
+      <div class="names-modal-content">
+        <p class="modal-kicker">Antes de jugar</p>
+        <h2 id="names-modal-title">&#191;Qui&#233;nes juegan?</h2>
+        <p id="names-modal-description">Elige un nombre de la lista o escribe uno nuevo.</p>
+        <div class="player-names" id="player-names"></div>
+        <p id="name-status" role="status"></p>
+        <div class="names-modal-actions">
+          <button class="modal-action" id="confirm-names-button" type="button">Empezar a jugar</button>
+          <button class="victory-home-button" id="cancel-names-button" type="button">Volver</button>
+        </div>
+      </div>
+    </dialog>
   </body>
 </html>
